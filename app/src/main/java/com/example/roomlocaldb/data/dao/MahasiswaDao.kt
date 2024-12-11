@@ -7,6 +7,7 @@ import com.example.roomlocaldb.data.entity.Mahasiswa
 
 @Dao
 interface MahasiswaDao {
+
     @Insert
     suspend fun insertMahasiswa(mahasiswa: Mahasiswa)
 }
