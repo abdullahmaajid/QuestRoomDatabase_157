@@ -6,6 +6,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.roomlocaldb.KrsApp
 import com.example.roomlocaldb.ui.viewmodel.MahasiswaViewModel
+import androidx.lifecycle.createSavedStateHandle
 
 
 object PenyediaViewModel{
@@ -13,6 +14,19 @@ object PenyediaViewModel{
         initializer {
             MahasiswaViewModel(
                 krsApp().containerApp.RepositoryMhs
+            )
+        }
+
+        initializer{
+            DetailMhsViewModel(
+                createSavedStateHandle(),
+                KrsApp().containerApp.repositoryMhs
+            )
+        }
+        initializer{
+            UpdateMhsViewModel(
+                createSavedStateHandle(),
+                KrsApp().containerApp.repositoryMhs
             )
         }
     }
