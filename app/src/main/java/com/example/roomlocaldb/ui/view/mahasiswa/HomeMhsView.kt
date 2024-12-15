@@ -1,5 +1,16 @@
 package com.example.roomlocaldb.ui.view.mahasiswa
 
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.roomlocaldb.ui.customwidget.CustomTopAppBar
+import com.example.roomlocaldb.ui.viewmodel.HomeMhsViewModel
+import com.example.roomlocaldb.ui.viewmodel.PenyediaViewModel
+
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.CircularProgressIndicator
@@ -42,6 +53,44 @@ import com.example.roomlocaldb.data.entity.Mahasiswa
 import com.example.roomlocaldb.ui.viewmodel.HomeUiState
 import kotlinx.coroutines.launch
 
+
+
+@Composable
+fun HomeMhsView(
+    viewModel: HomeMhsViewModel = viewModel(factory = PenyediaViewModel.Factory),
+    onAddMhs: () -> Unit = { },
+    onDetailClick: (String) -> Unit = { },
+    modifier: Modifier = Modifier )
+{
+    Scaffold (topBar = {
+        CustomTopAppBar(
+            judul = "Daftar Mahasiswa",
+            showBackButton = false,
+            onBack = { },
+        )
+    },
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = onAddMhs,
+                shape = MaterialTheme.shapes.medium,
+                modifier = Modifier.padding(16.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Add,
+                    contentDescription = "Tambah Mahasiswa")
+            }
+        }){
+            innerPadding ->
+        val homeUiState by viewModel.homeUiState.collectAsState()
+        BodyHomeMhsView(
+            homeUiState = homeUiState,
+            onClick = {
+                onDetailClick(it)
+            },
+            modifier = Modifier.padding(innerPadding)
+        )
+    }
+}
 
 
 @Composable
