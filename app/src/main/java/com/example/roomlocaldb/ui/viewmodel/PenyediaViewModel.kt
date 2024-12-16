@@ -20,7 +20,7 @@ object PenyediaViewModel{
 
         initializer {
             HomeMhsViewModel(
-                KrsApp().containerApp.repositoryMhs
+                KrsApp().containerApp.RepositoryMhs
             )
         }
 
@@ -28,7 +28,7 @@ object PenyediaViewModel{
         initializer{
             DetailMhsViewModel(
                 createSavedStateHandle(),
-                KrsApp().containerApp.repositoryMhs
+                KrsApp().containerApp.RepositoryMhs
             )
         }
 
@@ -37,7 +37,7 @@ object PenyediaViewModel{
         initializer{
             UpdateMhsViewModel(
                 createSavedStateHandle(),
-                KrsApp().containerApp.repositoryMhs
+                KrsApp().containerApp.RepositoryMhs
             )
         }
     }
