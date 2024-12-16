@@ -23,6 +23,10 @@ import androidx.compose.ui.unit.dp
 import com.example.roomlocaldb.data.entity.Mahasiswa
 
 
+
+
+
+
 @Composable
 fun ItemDetailMhs(
     modifier: Modifier = Modifier,
