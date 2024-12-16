@@ -35,7 +35,7 @@ import com.example.roomlocaldb.ui.viewmodel.DetailUiState
 import com.example.roomlocaldb.ui.viewmodel.toMahasiswaEntity
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
+
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
