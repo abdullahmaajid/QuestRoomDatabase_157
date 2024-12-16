@@ -6,6 +6,9 @@ interface AlamatNavigasi {
 
 }
 
+object DestinasiInsert : AlamatNavigasi{   //object akan menjadi nama halaman/ menjadi pengenal halaman
+    override val route: String = "insert_mhs"
+}
 
 object DestinasiHome : AlamatNavigasi{
     override val route = "home"

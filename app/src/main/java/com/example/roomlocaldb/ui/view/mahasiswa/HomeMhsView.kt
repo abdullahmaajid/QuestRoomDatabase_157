@@ -144,7 +144,7 @@ fun BodyHomeMhsView(
                     onClick(it)
                     println(it)
                 },
-                modifier = Modifier
+                modifier = Modifier.padding(top = 100.dp)
             )
         }
     }
@@ -184,10 +184,10 @@ fun CardMhs(
             .fillMaxWidth()
             .padding(8.dp)
     ){
-        Column(modifier = Modifier.padding(8.dp)
+        Column(modifier = Modifier.padding(12.dp)
         )
         {
-            Row (modifier = Modifier.fillMaxWidth(),
+            Row (modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
                 verticalAlignment = Alignment.CenterVertically)
             {
                 Icon(imageVector = Icons.Filled.Person, contentDescription = "")
@@ -198,7 +198,7 @@ fun CardMhs(
                     fontSize = 20.sp
                 )
             }
-            Row (modifier = Modifier.fillMaxWidth(),
+            Row (modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
                 verticalAlignment = Alignment.CenterVertically)
             {
                 Icon(imageVector = Icons.Filled.DateRange, contentDescription = "")
@@ -209,7 +209,7 @@ fun CardMhs(
                     fontSize = 16.sp
                 )
             }
-            Row (modifier = Modifier.fillMaxWidth(),
+            Row (modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
                 verticalAlignment = Alignment.CenterVertically)
             {
                 Icon(imageVector = Icons.Filled.Home, contentDescription = "")

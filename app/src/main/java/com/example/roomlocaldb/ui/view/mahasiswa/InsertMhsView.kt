@@ -69,11 +69,12 @@ fun InsertMhsView(
                 .fillMaxSize()
                 .padding(padding)
                 .padding(16.dp)
-        ) {
+                .padding(horizontal = 16.dp),
+            ) {
             CustomTopAppBar(
                 onBack = onBack,
                 showBackButton = true,
-                judul = "Tambah Mahasiswa"
+                judul = "Tambah Mahasiswa",
             )
             // isi Body
             InsertBodyMhs(
@@ -136,7 +137,7 @@ fun FormMahasiswa(
     val kelas = listOf("A","B","C","D","E")
 
     Column (
-        modifier = modifier.fillMaxWidth()
+        modifier = modifier.fillMaxWidth().padding(top = 20.dp)
     ){
 
         OutlinedTextField(
@@ -166,7 +167,7 @@ fun FormMahasiswa(
         )
         Text(text = errorState.nim ?: "", color = Color.Red)
 
-        Spacer(modifier = Modifier.height(16.dp))
+        // Spacer(modifier = Modifier.height(16.dp))
         Text(text = "Jenis Kelamin")
         Row (
             modifier = Modifier.fillMaxWidth()
@@ -226,7 +227,7 @@ fun FormMahasiswa(
             label = { Text("Angkatan") },
             isError = errorState.angkatan != null,
             placeholder = { Text("Masukkan Angkatan") },
-
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
             )
         Text(text = errorState.angkatan ?: "", color = Color.Red)
     }

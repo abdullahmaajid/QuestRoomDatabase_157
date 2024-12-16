@@ -8,7 +8,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.roomlocaldb.ui.view.mahasiswa.DestinasiInsert
 import com.example.roomlocaldb.ui.view.mahasiswa.InsertMhsView
 
 
