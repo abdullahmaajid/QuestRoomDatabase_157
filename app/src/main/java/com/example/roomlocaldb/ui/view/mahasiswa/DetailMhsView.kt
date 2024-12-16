@@ -33,6 +33,61 @@ import androidx.compose.runtime.setValue
 
 import com.example.roomlocaldb.ui.viewmodel.DetailUiState
 import com.example.roomlocaldb.ui.viewmodel.toMahasiswaEntity
+
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.collectAsState
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.roomlocaldb.ui.customwidget.CustomTopAppBar
+import com.example.roomlocaldb.ui.customwidget.CustomTopAppBar
+import com.example.roomlocaldb.ui.viewmodel.DetailMhsViewModel
+import com.example.roomlocaldb.ui.viewmodel.PenyediaViewModel
+
+
+@Composable
+fun DetailMhsView(
+    modifier: Modifier = Modifier,
+    viewModel: DetailMhsViewModel = viewModel(factory = PenyediaViewModel.Factory),
+    onBack: () -> Unit = { },
+    onEditClick: (String) -> Unit ={ },
+    onDeleteClick: () -> Unit)
+{
+    Scaffold (topBar = {
+        CustomTopAppBar(
+            judul = "Detail Mahasiswa",
+            showBackButton = true,
+            onBack = onBack,
+        )
+    },
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = {onEditClick(viewModel.detailUiEvent.value.detailUiEvent.nim)},
+                shape = MaterialTheme.shapes.medium,
+                modifier = Modifier.padding(16.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Edit,
+                    contentDescription = "Edit Mahasiswa")
+            }
+        }){
+            innerPadding ->
+        val detailUiState by viewModel.detailUiEvent.collectAsState()
+        BodyDetailMhs(
+            modifier = Modifier.padding(innerPadding),
+            detailUiState = detailUiState,
+            onDeleteClick = {
+                viewModel.deleteMhs()
+                onDeleteClick()
+            }
+        )
+    }
+}
+
+
 @Composable
 fun BodyDetailMhs(
     modifier: Modifier = Modifier,
