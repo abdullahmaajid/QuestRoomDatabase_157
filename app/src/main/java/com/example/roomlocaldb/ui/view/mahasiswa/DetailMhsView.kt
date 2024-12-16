@@ -14,6 +14,46 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.ui.unit.dp
+import com.example.roomlocaldb.data.entity.Mahasiswa
+
+
+@Composable
+fun ItemDetailMhs(
+    modifier: Modifier = Modifier,
+    mahasiswa: Mahasiswa
+){
+    Card(
+        modifier = modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.primaryContainer,
+            contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+        )
+    ) {
+        Column(modifier = Modifier.padding(16.dp)
+        ) {
+            ComponentDetailMhs(judul = "NIM", isinya = mahasiswa.nim)
+            Spacer(modifier =Modifier.padding(4.dp))
+            ComponentDetailMhs(judul = "Nama", isinya = mahasiswa.nama)
+            Spacer(modifier =Modifier.padding(4.dp))
+            ComponentDetailMhs(judul = "Alamat", isinya = mahasiswa.alamat)
+            Spacer(modifier =Modifier.padding(4.dp))
+            ComponentDetailMhs(judul = "Jenis Kelamin", isinya = mahasiswa.jenisKelamin)
+            Spacer(modifier =Modifier.padding(4.dp))
+            ComponentDetailMhs(judul = "Kelas", isinya = mahasiswa.kelas)
+            Spacer(modifier =Modifier.padding(4.dp))
+            ComponentDetailMhs(judul = "Angkatan", isinya = mahasiswa.angkatan)
+        }
+    }
+}
+
+
+
 @Composable
 fun ComponentDetailMhs(
     modifier: Modifier =Modifier,
