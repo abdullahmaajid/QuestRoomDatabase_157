@@ -1,15 +1,15 @@
 package com.example.roomlocaldb.repository
 
 import com.example.roomlocaldb.data.entity.Mahasiswa
-import java.util.concurrent.Flow
+import kotlinx.coroutines.flow.Flow
 
-//Jika di Dao ada insert di repository juga harus ada insert
 interface RepositoryMhs {
     suspend fun insertMhs(mahasiswa: Mahasiswa)
+    fun getAllMhs() : Flow<List<Mahasiswa>> //methode untuk memanggil fungsi untuk mendapatkan semua data
 
+    fun getMhs(nim: String) : Flow<Mahasiswa> //mengambil data mahasiswa berdasarkan Nim
 
-    fun getAllMhs() : Flow<List<Mahasiswa>>
-    fun getMhs(nim: String) : Flow<Mahasiswa>
-    suspend fun deleteMhs(mahasiswa: Mahasiswa)
-    suspend fun updateMhs(mahasiswa: Mahasiswa)
+    suspend fun deleteMhs(mahasiswa: Mahasiswa) // menghapus data mahasiswa
+
+    suspend fun updateMhs(mahasiswa: Mahasiswa) //memperbarui data mahasiswa di dalam database
 }
