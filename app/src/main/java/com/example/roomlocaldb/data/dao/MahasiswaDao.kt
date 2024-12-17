@@ -6,16 +6,10 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import com.example.roomlocaldb.data.entity.Mahasiswa
-import java.util.concurrent.Flow
-
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface MahasiswaDao {
-
-
-
-
-
 
     @Query("SELECT * FROM mahasiswa ORDER BY nama ASC")
     fun getAllMahasiswa() : Flow<List<Mahasiswa>>
