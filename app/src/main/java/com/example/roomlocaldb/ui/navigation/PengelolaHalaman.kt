@@ -2,19 +2,19 @@ package com.example.roomlocaldb.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.focusModifier
 import androidx.navigation.NavController
 import androidx.navigation.NavHost
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.roomlocaldb.ui.view.mahasiswa.InsertMhsView
-
-
-import androidx.navigation.NavType
 import androidx.navigation.navArgument
+import com.example.roomlocaldb.ui.view.mahasiswa.DestinasiInsert
 import com.example.roomlocaldb.ui.view.mahasiswa.DetailMhsView
 import com.example.roomlocaldb.ui.view.mahasiswa.HomeMhsView
+import com.example.roomlocaldb.ui.view.mahasiswa.InsertMhsView
 import com.example.roomlocaldb.ui.view.mahasiswa.UpdateMhsView
 
 @Composable
@@ -22,48 +22,49 @@ fun PengelolaHalaman(
     navController: NavHostController = rememberNavController(),
     modifier: Modifier= Modifier
 ){
-    NavHost(navController = navController, startDestination = DestinasiHome.route)
-    {
 
-
+    NavHost(navController = navController, startDestination = DestinasiHome.route) {
         composable(
             route = DestinasiHome.route
         ){
             HomeMhsView(
                 onDetailClick = { nim ->
                     navController.navigate("${DestinasiDetail.route}/$nim")
-                    println("PengelolaHalaman: nim = $nim")
+                    println("PenglolaHalaman: nim = $nim")
                 },
                 onAddMhs = {
                     navController.navigate(DestinasiInsert.route)
                 },
-                modifier = modifier)
+                modifier = modifier
+            )
         }
 
         composable(
             route = DestinasiInsert.route
-        ){
-            InsertMhsView(onBack = {
-                navController.popBackStack()
-            },
+        ) {
+            InsertMhsView(
+                onBack = {
+                    navController.popBackStack()
+                },
                 onNavigate = {
                     navController.popBackStack()
                 },
-                modifier = modifier)
+                modifier = modifier,
+            )
         }
+
         composable(
             DestinasiDetail.routesWithArg,
             arguments = listOf(
-                navArgument(DestinasiDetail.NIM){
+                navArgument(DestinasiDetail.NIM) {
                     type = NavType.StringType
                 }
             )
         ){
             val nim = it.arguments?.getString(DestinasiDetail.NIM)
             nim?.let { nim ->
-                DetailMhsView(
-                    onBack = {
-                        navController.popBackStack()
+                DetailMhsView (
+                    onBack = { navController.popBackStack()
                     },
                     onEditClick = {
                         navController.navigate("${DestinasiUpdate.route}/$it")
@@ -75,10 +76,11 @@ fun PengelolaHalaman(
                 )
             }
         }
+
         composable(
-            DestinasiUpdate.routesWithArg,
+            DestinasiUpdate.routeWithArg,
             arguments = listOf(
-                navArgument(DestinasiUpdate.NIM){
+                navArgument(DestinasiUpdate.NIM) {
                     type = NavType.StringType
                 }
             )
@@ -92,7 +94,6 @@ fun PengelolaHalaman(
                 },
                 modifier = modifier
             )
-
         }
     }
 }

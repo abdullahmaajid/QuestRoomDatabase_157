@@ -1,11 +1,10 @@
 package com.example.roomlocaldb.ui.viewmodel
 
 
-
-import androidx.compose.runtime.internal.isLiveLiteralsEnabled
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.roomlocaldb.data.entity.Mahasiswa
 import com.example.roomlocaldb.repository.RepositoryMhs
 import com.example.roomlocaldb.ui.navigation.DestinasiDetail
@@ -18,12 +17,14 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-class DetailMhsViewModel (
+
+class DetailMhsViewModel(
     savedStateHandle: SavedStateHandle,
     private val repositoryMhs: RepositoryMhs,
-): ViewModel()
-{
+
+    ) : ViewModel () {
     private val _nim: String = checkNotNull(savedStateHandle[DestinasiDetail.NIM])
+
     val detailUiState: StateFlow<DetailUiState> = repositoryMhs.getMhs(_nim)
         .filterNotNull()
         .map {
@@ -48,8 +49,9 @@ class DetailMhsViewModel (
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(2000),
-            initialValue =
-            DetailUiState(isLoading = true)
+            initialValue = DetailUiState(
+                isLoading = true,
+            ),
         )
     fun deleteMhs(){
         detailUiState.value.detailUiEvent.toMahasiswaEntity().let {
@@ -65,14 +67,15 @@ data class DetailUiState(
     val isLoading: Boolean = false,
     val isError: Boolean = false,
     val errorMessage: String = ""
-){
-    val isUIEventEmpty: Boolean
+) {
+    val isUiEventEmpty: Boolean
         get() = detailUiEvent == MahasiswaEvent()
+
     val isUiEventNotEmpty: Boolean
         get() = detailUiEvent != MahasiswaEvent()
 }
 
-fun Mahasiswa.toDetailUiEvent(): MahasiswaEvent{
+fun Mahasiswa.toDetailUiEvent(): MahasiswaEvent {
     return MahasiswaEvent(
         nim = nim,
         nama = nama,

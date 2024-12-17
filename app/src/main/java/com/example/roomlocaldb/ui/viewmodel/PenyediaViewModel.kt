@@ -1,12 +1,12 @@
 package com.example.roomlocaldb.ui.viewmodel
 
+
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.roomlocaldb.KrsApp
-import com.example.roomlocaldb.ui.viewmodel.MahasiswaViewModel
-import androidx.lifecycle.createSavedStateHandle
 
 
 object PenyediaViewModel{
@@ -16,28 +16,21 @@ object PenyediaViewModel{
                 krsApp().containerApp.RepositoryMhs
             )
         }
-
-
         initializer {
             HomeMhsViewModel(
-                KrsApp().containerApp.RepositoryMhs
+                krsApp().containerApp.RepositoryMhs
             )
         }
-
-
-        initializer{
+        initializer {
             DetailMhsViewModel(
                 createSavedStateHandle(),
-                KrsApp().containerApp.RepositoryMhs
+                krsApp().containerApp.RepositoryMhs,
             )
         }
-
-
-
-        initializer{
+        initializer {
             UpdateMhsViewModel(
                 createSavedStateHandle(),
-                KrsApp().containerApp.RepositoryMhs
+                krsApp().containerApp.RepositoryMhs
             )
         }
     }

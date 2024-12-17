@@ -1,5 +1,7 @@
 package com.example.roomlocaldb.ui.viewmodel
 
+
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.roomlocaldb.data.entity.Mahasiswa
@@ -13,15 +15,13 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 
-
-class HomeMhsViewModel (
+class HomeMhsViewModel(
     private val repositoryMhs: RepositoryMhs
-): ViewModel()
-{
+) : ViewModel(){
     val homeUiState: StateFlow<HomeUiState> = repositoryMhs.getAllMhs()
         .filterNotNull()
         .map {
-            HomeUiState(
+            HomeUiState (
                 listMhs = it.toList(),
                 isLoading = false,
             )
@@ -35,20 +35,22 @@ class HomeMhsViewModel (
                 HomeUiState(
                     isLoading = false,
                     isError = true,
-                    errorMessage = it.message ?: "Terjadi Kesalahan")
+                    errorMessage = it.message ?: "Terjadi Kesalahan"
+                )
             )
         }
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000),
-            initialValue =
-            HomeUiState(isLoading = true)
+            initialValue = HomeUiState(
+                isLoading = true,
+            )
         )
 }
 
 data class HomeUiState(
     val listMhs: List<Mahasiswa> = listOf(),
     val isLoading: Boolean = false,
-    val isError: Boolean = false,
+    val isError : Boolean = false,
     val errorMessage: String = ""
 )
