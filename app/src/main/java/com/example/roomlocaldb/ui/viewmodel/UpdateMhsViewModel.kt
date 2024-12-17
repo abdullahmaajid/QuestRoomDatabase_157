@@ -78,13 +78,12 @@ class UpdateMhsViewModel (
                 snackBarMessage = "Data gagal diupdate"
             )
         }
-
-        fun resetSnackBarMessage(){
-            updateUiState = updateUiState.copy(snackBarMessage = null)
-        }
     }
 
-    fun Mahasiswa.toUIStateMhs(): MhsUIState = MhsUIState(
-        mahasiswaEvent = this.toDetailUiEvent()
-    )
+    fun resetSnackBarMessage(){
+        updateUiState = updateUiState.copy(snackBarMessage = null)
+    }
 }
+fun Mahasiswa.toUIStateMhs(): MhsUIState = MhsUIState(
+    mahasiswaEvent = this.toDetailUiEvent()
+)
